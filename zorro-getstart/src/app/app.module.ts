@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationService } from './services/AuthenticationService';
 import { GlobalRef } from './services/GlobalRef';
+import { NZ_MESSAGE_CONFIG } from 'ng-zorro-antd/src/release/message/nz-message-config';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -32,7 +33,11 @@ const appRoutes: Routes = [
     NgZorroAntdModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GlobalRef, AuthenticationService],
+  providers: [
+    GlobalRef,
+    AuthenticationService,
+    { provide: NZ_MESSAGE_CONFIG, useValue: { nzDuration: 3000 } }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

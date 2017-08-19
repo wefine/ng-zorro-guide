@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService, User } from '../../services/AuthenticationService';
+import { NzMessageService } from 'ng-zorro-antd/src/release/message/nz-message.service';
+import { AuthenticationService } from '../../services/AuthenticationService';
 
 @Component({
   selector: 'app-login',
@@ -10,21 +11,20 @@ import { AuthenticationService, User } from '../../services/AuthenticationServic
 export class LoginComponent implements OnInit {
   fg: FormGroup;
   fgc: object;
-  public user = new User('', '');
-  public errorMsg = '';
 
   constructor(
+    private _message: NzMessageService,
     private fb: FormBuilder,
-    private auth: AuthenticationService) {
+    private _auth: AuthenticationService) {
   }
 
   login() {
     for (const i in this.fg.controls) {
-      this.fg.controls[ i ].markAsDirty();
+      this.fgc[i].markAsDirty();
     }
 
-    if (!this.auth.login(this.fg["_value"])) {
-      this.errorMsg = 'Failed to login';
+    if (!this.fg.invalid && !this._auth.login(this.fg['_value'])) {
+      this._message.error('账户或密码错误，请确认后再试！')
     }
   }
 

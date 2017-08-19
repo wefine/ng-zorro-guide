@@ -25,9 +25,13 @@ export class AuthenticationService {
   }
 
   login(user) {
+    console.log("do login auth!");
+
     let authenticatedUser = users.find(u => u.name === user.name);
     if (authenticatedUser && authenticatedUser.password === user.password) {
       localStorage.setItem('user', JSON.stringify(authenticatedUser));
+
+      console.log("navigate to home!");
       this._router.navigate(['home']);
       return true;
     }

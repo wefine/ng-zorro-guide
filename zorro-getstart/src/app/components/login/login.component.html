@@ -1,27 +1,29 @@
-<div class="container" >
-  <div class="title">
-    Welcome
-  </div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="input-field col s12">
-        <input [(ngModel)]="user.name" id="email"
-               type="email" class="validate">
-        <label for="email">Email</label>
-      </div>
+<div class="center-block">
+<form nz-form [formGroup]="fg" class="login-form" (ngSubmit)="login()">
+  <div nz-form-item>
+    <div nz-form-control [nzValidateStatus]="fgc['name']">
+      <nz-input formControlName="name" [nzPlaceHolder]="'帐户'" [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-user"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="fgc['name'].dirty&&fgc['name'].hasError('required')">Please input your name!</div>
     </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <input [(ngModel)]="user.password" id="password"
-               type="password" class="validate">
-        <label for="password">Password</label>
-      </div>
-    </div>
-
-    <span>{{errorMsg}}</span>
-    <button (click)="login()"
-            class="btn waves-effect waves-light"
-            type="submit" name="action">Login</button>
   </div>
+  <div nz-form-item>
+    <div nz-form-control [nzValidateStatus]="fgc['password']">
+      <nz-input formControlName="password" [nzType]="'password'" [nzPlaceHolder]="'密码'" [nzSize]="'large'">
+        <ng-template #prefix>
+          <i class="anticon anticon-lock"></i>
+        </ng-template>
+      </nz-input>
+      <div nz-form-explain *ngIf="fgc['password'].dirty&&fgc['password'].hasError('required')">Please input your Password!</div>
+    </div>
+  </div>
+  <div nz-form-item>
+    <div nz-form-control>
+      <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'">登陆</button>
+    </div>
+  </div>
+</form>
 </div>

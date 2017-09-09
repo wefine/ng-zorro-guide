@@ -30,7 +30,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule.forRoot(),
+    // 该引入图标字体的方式可行
+    NgZorroAntdModule.forRoot({ extraFontName: 'anticon', extraFontUrl: './assets/fonts/iconfont/iconfont' }),
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
